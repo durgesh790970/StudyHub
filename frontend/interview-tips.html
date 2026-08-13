@@ -1,0 +1,200 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interview Tips & Tricks — StudyPro Hub</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    .tip-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-left: 4px solid #0d6efd;
+    }
+    .tip-card h4 {
+      margin-top: 0;
+      color: #0d6efd;
+    }
+    .category-badge {
+      display: inline-block;
+      background: #e7f3ff;
+      color: #0d6efd;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin-right: 0.5rem;
+    }
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .tip-item {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .tip-item-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .tip-item h5 {
+      margin: 0.5rem 0;
+      color: #0d6efd;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="nav-wrap">
+        <a href="{% url 'accounts:dashboard' %}" class="brand">
+          <span class="logo">SP</span>
+          <span>StudyPro Hub</span>
+        </a>
+        <nav class="main-nav">
+          {% if user.is_authenticated %}
+            <a href="{% url 'accounts:profile' %}" class="profile-link">👤</a>
+          {% else %}
+            <a href="{% url 'accounts:login_page' %}" class="cta">Login</a>
+          {% endif %}
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section style="padding: 2rem 0;">
+      <h1>💡 Interview Tips & Tricks</h1>
+      <p style="font-size: 1.1rem; color: #666;">Expert strategies to ace both technical and HR interviews</p>
+    </section>
+
+    <section style="padding: 2rem 0;">
+      <h2>Technical Interview Tips</h2>
+      
+      <div class="tip-card">
+        <h4>Understand the Problem Before Coding</h4>
+        <span class="category-badge">Technical</span>
+        <p>Always ask clarifying questions about the problem. Understand constraints, input/output formats, and edge cases before writing a single line of code.</p>
+        <strong>Example:</strong> If given "Find two sum", ask: "Are duplicates allowed? What about negative numbers? Should I optimize for space or time?"
+      </div>
+
+      <div class="tip-card">
+        <h4>Think Aloud During Coding</h4>
+        <span class="category-badge">Technical</span>
+        <p>Explain your approach and thought process as you code. This helps the interviewer understand your logic and problem-solving approach.</p>
+        <strong>Tip:</strong> "I'm thinking of using a hash map to store elements for O(n) lookup time instead of O(n²) brute force approach."
+      </div>
+
+      <div class="tip-card">
+        <h4>Optimize After You Have a Working Solution</h4>
+        <span class="category-badge">Technical</span>
+        <p>First, get a working solution. Then discuss optimizations for time and space complexity.</p>
+        <strong>Progression:</strong> Brute Force → Working Solution → Optimized Solution
+      </div>
+
+      <div class="tip-card">
+        <h4>Test Your Code with Examples</h4>
+        <span class="category-badge">Technical</span>
+        <p>Manually test your solution with provided examples AND edge cases (empty arrays, single elements, duplicates, negative numbers, etc.)</p>
+        <strong>Example:</strong> For array problems, test with empty [], single element [1], duplicates [1,1,1]
+      </div>
+    </section>
+
+    <section style="padding: 2rem 0;">
+      <h2>Behavioral & HR Interview Tips</h2>
+      
+      <div class="tip-card">
+        <h4>Use the STAR Method</h4>
+        <span class="category-badge">Behavioral</span>
+        <p><strong>S</strong>ituation → <strong>T</strong>ask → <strong>A</strong>ction → <strong>R</strong>esult. Structure all your answers with this framework.</p>
+        <strong>Example:</strong> "In my project (Situation), we had performance issues (Task), I optimized the database queries (Action), reducing load time by 60% (Result)."
+      </div>
+
+      <div class="tip-card">
+        <h4>Prepare for Common HR Questions</h4>
+        <span class="category-badge">Behavioral</span>
+        <p>Prepare stories for: Your strengths, weaknesses, conflicts, failures, achievements, why this company, where do you see yourself, etc.</p>
+        <strong>Key:</strong> Every story should have a learning or achievement outcome
+      </div>
+
+      <div class="tip-card">
+        <h4>Research the Company Thoroughly</h4>
+        <span class="category-badge">Behavioral</span>
+        <p>Know the company's mission, recent projects, technologies they use, leadership team, and latest news. Reference them during the interview.</p>
+        <strong>Tip:</strong> "I saw your recent announcement about the new product launch and I'm excited about..."
+      </div>
+
+      <div class="tip-card">
+        <h4>Ask Smart Questions</h4>
+        <span class="category-badge">Behavioral</span>
+        <p>At the end, ask thoughtful questions about the role, team, growth opportunities, and company culture. This shows genuine interest.</p>
+        <strong>Good questions:</strong> "What does a typical day look like?", "How is success measured?", "What are the growth opportunities?"
+      </div>
+    </section>
+
+    <section style="padding: 2rem 0;">
+      <h2>Day-Before & Day-Of Tips</h2>
+      <div class="tips-grid">
+        <div class="tip-item">
+          <div class="tip-item-icon">😴</div>
+          <h5>Get Good Sleep</h5>
+          <p>Sleep 8 hours before the interview. Your brain performs better when well-rested.</p>
+        </div>
+        <div class="tip-item">
+          <div class="tip-item-icon">👔</div>
+          <h5>Dress Professionally</h5>
+          <p>Dress one level up from the company's typical dress code.</p>
+        </div>
+        <div class="tip-item">
+          <div class="tip-item-icon">⏰</div>
+          <h5>Arrive Early</h5>
+          <p>Arrive 15 minutes early to compose yourself and avoid stress.</p>
+        </div>
+        <div class="tip-item">
+          <div class="tip-item-icon">📱</div>
+          <h5>Silence Your Phone</h5>
+          <p>Keep your phone on silent or switched off during the interview.</p>
+        </div>
+        <div class="tip-item">
+          <div class="tip-item-icon">🤝</div>
+          <h5>Firm Handshake</h5>
+          <p>Give a firm but not aggressive handshake and make eye contact.</p>
+        </div>
+        <div class="tip-item">
+          <div class="tip-item-icon">😊</div>
+          <h5>Smile & Be Positive</h5>
+          <p>Maintain positive body language and smile genuinely throughout.</p>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding: 2rem 0; background: #f8f9fa; border-radius: 12px; padding: 2rem;">
+      <h2>Quick Checklist</h2>
+      <ul style="font-size: 1.05rem; line-height: 2;">
+        <li>✅ Researched company and role thoroughly</li>
+        <li>✅ Prepared 3-4 strong STAR stories</li>
+        <li>✅ Reviewed core technical concepts</li>
+        <li>✅ Have questions prepared for interviewer</li>
+        <li>✅ Know the interviewer's name and role</li>
+        <li>✅ Tested camera/mic (for video interviews)</li>
+        <li>✅ Have pen and paper ready</li>
+        <li>✅ Got good sleep and ate breakfast</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer style="background: #2c3e50; color: white; text-align: center; padding: 2rem; margin-top: 3rem;">
+    <p>&copy; 2024 StudyPro Hub. All rights reserved.</p>
+  </footer>
+
+  <script defer src="{% static 'js/dashboard-activity-tracker.js' %}"></script>
+</body>
+</html>

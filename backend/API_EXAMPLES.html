@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Usage Examples - StudyHub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .example-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+        
+        .code-block {
+            background: #f9f9f9;
+            border-left: 4px solid #667eea;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            border-radius: 4px;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-family: inherit;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #5568d3;
+        }
+        
+        .result {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #333;
+        }
+        
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border-color: #c3e6cb;
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+        }
+        
+        .note {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #0c5394;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 StudyHub API Usage Examples</h1>
+        
+        <!-- Authentication Examples -->
+        <div class="example-section">
+            <h2>🔐 Authentication</h2>
+            
+            <h3>Login Example</h3>
+            <div class="code-block">
+&lt;form method="POST" action="/auth/login.php"&gt;
+    &lt;input type="email" name="email" required&gt;
+    &lt;input type="password" name="password" required&gt;
+    &lt;input type="hidden" name="csrf_token" value="TOKEN_HERE"&gt;
+    &lt;button type="submit"&gt;Login&lt;/button&gt;
+&lt;/form&gt;
+            </div>
+            
+            <h3>JavaScript Login</h3>
+            <div class="code-block">
+async function login(email, password) {
+    const response = await fetch('/auth/login.php', {
+        method: 'POST',
+        body: new FormData(document.querySelector('form'))
+    });
+    
+    if (response.url.includes('dashboard')) {
+        console.log('Login successful!');
+    }
+}
+            </div>
+            
+            <h3>Logout</h3>
+            <div class="code-block">
+window.location.href = '/auth/logout.php';
+            </div>
+        </div>
+        
+        <!-- Courses API Examples -->
+        <div class="example-section">
+            <h2>📚 Courses API</h2>
+            
+            <h3>1. Get All Courses</h3>
+            <div class="code-block">
+// GET request - no authentication required
+fetch('/api/courses.php?action=list&page=1')
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            console.log('Courses:', data.data.courses);
+            console.log('Total:', data.data.pagination.total_items);
+        }
+    });
+            </div>
+            
+            <h3>2. Get Single Course</h3>
+            <div class="code-block">
+fetch('/api/courses.php?action=get&id=1')
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            console.log('Course:', data.data);
+            console.log('Materials:', data.data.materials);
+            console.log('Quizzes:', data.data.quizzes);
+        }
+    });
+            </div>
+            
+            <h3>3. Create Course (Instructor/Admin)</h3>
+            <div class="code-block">
+const formData = new FormData();
+formData.append('action', 'create');
+formData.append('title', 'Advanced PHP');
+formData.append('description', 'Learn advanced PHP concepts');
+formData.append('category', 'Programming');
+formData.append('level', 'advanced');
+formData.append('csrf_token', getCsrfToken());
+
+fetch('/api/courses.php', {
+    method: 'POST',
+    body: formData
+})
+.then(r => r.json())
+.then(data => console.log(data));
+            </div>
+            
+            <h3>4. Update Course</h3>
+            <div class="code-block">
+const formData = new FormData();
+formData.append('action', 'update');
+formData.append('id', 1);
+formData.append('title', 'Updated Title');
+formData.append('description', 'Updated description');
+formData.append('csrf_token', getCsrfToken());
+
+fetch('/api/courses.php', {
+    method: 'POST',
+    body: formData
+})
+.then(r => r.json())
+.then(data => console.log(data));
+            </div>
+            
+            <h3>5. Delete Course (Admin)</h3>
+            <div class="code-block">
+const formData = new FormData();
+formData.append('action', 'delete');
+formData.append('id', 1);
+formData.append('csrf_token', getCsrfToken());
+
+fetch('/api/courses.php', {
+    method: 'POST',
+    body: formData
+})
+.then(r => r.json())
+.then(data => console.log(data.message));
+            </div>
+            
+            <h3>6. Enroll in Course</h3>
+            <div class="code-block">
+const formData = new FormData();
+formData.append('action', 'enroll');
+formData.append('course_id', 1);
+formData.append('csrf_token', getCsrfToken());
+
+fetch('/api/courses.php', {
+    method: 'POST',
+    body: formData
+})
+.then(r => r.json())
+.then(data => console.log(data.message));
+            </div>
+        </div>
+        
+        <!-- Study Materials Examples -->
+        <div class="example-section">
+            <h2>📄 Study Materials API</h2>
+            
+            <h3>1. Get Materials for Course</h3>
+            <div class="code-block">
+fetch('/api/study_materials.php?action=list&course_id=1')
+    .then(r => r.json())
+    .then(data => {
+        if (data.status === 'success') {
+            console.log('Materials:', data.data);
+        }
+    });
+            </div>
+            
+            <h3>2. Upload Study Material</h3>
+            <div class="code-block">
+const formData = new FormData();
+formData.append('action', 'add');
+formData.append('course_id', 1);
+formData.append('title', 'PHP Guide');
+formData.append('description', 'Complete PHP guide');
+formData.append('file_type', 'pdf');
+formData.append('file', document.querySelector('input[type="file"]').files[0]);
+formData.append('csrf_token', getCsrfToken());
+
+fetch('/api/study_materials.php', {
+    method: 'POST',
+    body: formData
+})
+.then(r => r.json())
+.then(data => console.log(data));
+            </div>
+            
+            <h3>3. Delete Material</h3>
+            <div class="code-block">
+const formData = new FormData();
+formData.append('action', 'delete');
+formData.append('id', 1);
+formData.append('csrf_token', getCsrfToken());
+
+fetch('/api/study_materials.php', {
+    method: 'POST',
+    body: formData
+})
+.then(r => r.json())
+.then(data => console.log(data));
+            </div>
+        </div>
+        
+        <!-- Contact API Examples -->
+        <div class="example-section">
+            <h2>📧 Contact API</h2>
+            
+            <h3>1. Submit Contact Form</h3>
+            <div class="code-block">
+const formData = new FormData();
+formData.append('action', 'submit');
+formData.append('name', 'John Doe');
+formData.append('email', 'john@example.com');
+formData.append('subject', 'Question about courses');
+formData.append('message', 'I have a question...');
+formData.append('csrf_token', getCsrfToken());
+
+fetch('/api/contact.php', {
+    method: 'POST',
+    body: formData
+})
+.then(r => r.json())
+.then(data => console.log(data.message));
+            </div>
+            
+            <h3>2. Get All Messages (Admin)</h3>
+            <div class="code-block">
+fetch('/api/contact.php?action=list&page=1&status=unread')
+    .then(r => r.json())
+    .then(data => {
+        if (data.status === 'success') {
+            console.log('Messages:', data.data.messages);
+        }
+    });
+            </div>
+            
+            <h3>3. Update Message Status (Admin)</h3>
+            <div class="code-block">
+const formData = new FormData();
+formData.append('action', 'update_status');
+formData.append('id', 1);
+formData.append('status', 'replied');
+formData.append('csrf_token', getCsrfToken());
+
+fetch('/api/contact.php', {
+    method: 'POST',
+    body: formData
+})
+.then(r => r.json())
+.then(data => console.log(data));
+            </div>
+        </div>
+        
+        <!-- Helper Functions -->
+        <div class="example-section">
+            <h2>🛠️ Helper Functions</h2>
+            
+            <h3>Get CSRF Token</h3>
+            <div class="code-block">
+function getCsrfToken() {
+    const name = '_csrf_token';
+    const value = '; ' + document.cookie;
+    const parts = value.split('; ' + name + '=');
+    if (parts.length === 2) {
+        return parts.pop().split(';').shift();
+    }
+    
+    // Or get from form
+    return document.querySelector('[name="_csrf_token"]')?.value;
+}
+            </div>
+            
+            <h3>Generic API Call</h3>
+            <div class="code-block">
+async function apiCall(endpoint, action, data = {}) {
+    const formData = new FormData();
+    formData.append('action', action);
+    formData.append('csrf_token', getCsrfToken());
+    
+    Object.keys(data).forEach(key => {
+        formData.append(key, data[key]);
+    });
+    
+    const response = await fetch(endpoint, {
+        method: 'POST',
+        body: formData
+    });
+    
+    return response.json();
+}
+
+// Usage:
+apiCall('/api/courses.php', 'create', {
+    title: 'New Course',
+    description: 'Course description'
+}).then(data => console.log(data));
+            </div>
+            
+            <h3>Error Handling</h3>
+            <div class="code-block">
+fetch('/api/courses.php?action=list')
+    .then(r => r.json())
+    .then(data => {
+        if (data.status === 'success') {
+            console.log('Success:', data.data);
+        } else if (data.status === 'error') {
+            console.error('Error:', data.message);
+            // Handle error
+        }
+    })
+    .catch(err => {
+        console.error('Network error:', err);
+        // Handle network error
+    });
+            </div>
+        </div>
+        
+        <!-- Response Format -->
+        <div class="example-section">
+            <h2>📋 Response Format</h2>
+            
+            <h3>Success Response</h3>
+            <div class="code-block">
+{
+  "status": "success",
+  "message": "Operation completed successfully",
+  "data": {
+    // Response data here
+  }
+}
+            </div>
+            
+            <h3>Error Response</h3>
+            <div class="code-block">
+{
+  "status": "error",
+  "message": "Error description here",
+  "data": null
+}
+            </div>
+        </div>
+        
+        <!-- Important Notes -->
+        <div class="example-section">
+            <h2>⚠️ Important Notes</h2>
+            
+            <div class="note">
+                <strong>✅ CSRF Protection:</strong> Always include CSRF token in POST requests
+            </div>
+            
+            <div class="note">
+                <strong>✅ Authentication:</strong> Some endpoints require login. Check response status.
+            </div>
+            
+            <div class="note">
+                <strong>✅ File Uploads:</strong> Use FormData for file uploads, not JSON
+            </div>
+            
+            <div class="note">
+                <strong>✅ Permissions:</strong> Some operations require specific roles (Admin/Instructor)
+            </div>
+            
+            <div class="note">
+                <strong>✅ Error Handling:</strong> Always check response.status before processing data
+            </div>
+            
+            <div class="note">
+                <strong>✅ Pagination:</strong> List endpoints return pagination data
+            </div>
+        </div>
+        
+        <!-- Complete Example Form -->
+        <div class="example-section">
+            <h2>🎯 Complete Contact Form Example</h2>
+            
+            <form id="contactForm">
+                <div class="form-group">
+                    <label>Name:</label>
+                    <input type="text" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Subject:</label>
+                    <input type="text" name="subject">
+                </div>
+                
+                <div class="form-group">
+                    <label>Message:</label>
+                    <textarea name="message" required></textarea>
+                </div>
+                
+                <button type="button" class="btn" onclick="submitContactForm()">
+                    Send Message
+                </button>
+                
+                <div id="result"></div>
+            </form>
+            
+            <div class="code-block">
+async function submitContactForm() {
+    const formData = new FormData(document.querySelector('#contactForm'));
+    formData.append('action', 'submit');
+    formData.append('csrf_token', getCsrfToken());
+    
+    try {
+        const response = await fetch('/api/contact.php', {
+            method: 'POST',
+            body: formData
+        });
+        
+        const data = await response.json();
+        const resultDiv = document.querySelector('#result');
+        
+        if (data.status === 'success') {
+            resultDiv.className = 'result success';
+            resultDiv.innerHTML = '✅ ' + data.message;
+            document.querySelector('#contactForm').reset();
+        } else {
+            resultDiv.className = 'result error';
+            resultDiv.innerHTML = '❌ ' + data.message;
+        }
+    } catch (error) {
+        document.querySelector('#result').className = 'result error';
+        document.querySelector('#result').innerHTML = '❌ Error: ' + error.message;
+    }
+}
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function getCsrfToken() {
+            // In production, get from session or form
+            return 'placeholder_token';
+        }
+        
+        function submitContactForm() {
+            const formData = new FormData(document.querySelector('#contactForm'));
+            formData.append('action', 'submit');
+            formData.append('csrf_token', getCsrfToken());
+            
+            fetch('/api/contact.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(r => r.json())
+            .then(data => {
+                const resultDiv = document.querySelector('#result');
+                if (data.status === 'success') {
+                    resultDiv.className = 'result success';
+                    resultDiv.textContent = '✅ ' + data.message;
+                    document.querySelector('#contactForm').reset();
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.textContent = '❌ ' + data.message;
+                }
+            })
+            .catch(err => {
+                document.querySelector('#result').className = 'result error';
+                document.querySelector('#result').textContent = '❌ ' + err.message;
+            });
+        }
+    </script>
+</body>
+</html>

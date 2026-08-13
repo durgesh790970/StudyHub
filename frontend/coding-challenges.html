@@ -1,0 +1,213 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Coding Challenges — StudyPro Hub</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    .challenge-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-top: 4px solid #0d6efd;
+    }
+    .challenge-card h4 {
+      margin-top: 0;
+      color: #0d6efd;
+    }
+    .difficulty-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-right: 0.5rem;
+    }
+    .difficulty-easy {
+      background: #d4edda;
+      color: #155724;
+    }
+    .difficulty-medium {
+      background: #fff3cd;
+      color: #856404;
+    }
+    .difficulty-hard {
+      background: #f8d7da;
+      color: #721c24;
+    }
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 0.75rem;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+    .stat-value {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #0d6efd;
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      color: #666;
+    }
+    .btn-primary {
+      background: #0d6efd;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: #0056ca;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="nav-wrap">
+        <a href="{% url 'accounts:index' %}" class="brand">
+          <span class="logo">SP</span>
+          <span>StudyPro Hub</span>
+        </a>
+        <nav class="main-nav">
+          
+          {% if user.is_authenticated %}
+            <a href="{% url 'accounts:profile' %}" class="profile-link">👤</a>
+          {% else %}
+            <a href="{% url 'accounts:login_page' %}" class="cta">Login</a>
+          {% endif %}
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section style="padding: 2rem 0;">
+      <h1>💻 Daily Coding Challenges</h1>
+      <p style="font-size: 1.1rem; color: #666;">Daily problems to sharpen your coding skills and problem-solving abilities</p>
+    </section>
+
+    <section style="padding: 2rem 0;">
+      <h2>Today's Challenge</h2>
+      
+      <div class="challenge-card">
+        <h4>Two Sum Problem</h4>
+        <span class="difficulty-badge difficulty-easy">Easy</span>
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="stat-value">42%</div>
+            <div class="stat-label">Success Rate</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">2,431</div>
+            <div class="stat-label">Solved</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">Array/Hash</div>
+            <div class="stat-label">Topic</div>
+          </div>
+        </div>
+        <p><strong>Problem:</strong> Given an array of integers and a target, find two numbers that add up to the target.</p>
+        <button class="btn-primary">Solve Now</button>
+      </div>
+
+      <div class="challenge-card">
+        <h4>Longest Substring Without Repeating Characters</h4>
+        <span class="difficulty-badge difficulty-medium">Medium</span>
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="stat-value">35%</div>
+            <div class="stat-label">Success Rate</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">1,856</div>
+            <div class="stat-label">Solved</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">String</div>
+            <div class="stat-label">Topic</div>
+          </div>
+        </div>
+        <p><strong>Problem:</strong> Find the length of the longest substring without repeating characters in a given string.</p>
+        <button class="btn-primary">Solve Now</button>
+      </div>
+
+      <div class="challenge-card">
+        <h4>Merge K Sorted Lists</h4>
+        <span class="difficulty-badge difficulty-hard">Hard</span>
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="stat-value">22%</div>
+            <div class="stat-label">Success Rate</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">892</div>
+            <div class="stat-label">Solved</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">Linked List</div>
+            <div class="stat-label">Topic</div>
+          </div>
+        </div>
+        <p><strong>Problem:</strong> Merge k sorted linked lists into a single sorted linked list efficiently.</p>
+        <button class="btn-primary">Solve Now</button>
+      </div>
+
+      <div class="challenge-card">
+        <h4>Coin Change Problem</h4>
+        <span class="difficulty-badge difficulty-medium">Medium</span>
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="stat-value">38%</div>
+            <div class="stat-label">Success Rate</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">1,645</div>
+            <div class="stat-label">Solved</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">Dynamic Programming</div>
+            <div class="stat-label">Topic</div>
+          </div>
+        </div>
+        <p><strong>Problem:</strong> Find the minimum number of coins needed to make a given amount.</p>
+        <button class="btn-primary">Solve Now</button>
+      </div>
+    </section>
+
+    <section style="padding: 2rem 0; background: #f8f9fa; border-radius: 12px; padding: 2rem;">
+      <h2>Supported Languages</h2>
+      <p style="font-size: 1.05rem;">C++ • Java • Python • JavaScript • Golang • Ruby • C#</p>
+      
+      <h2 style="margin-top: 2rem;">Why Code Daily?</h2>
+      <ul style="font-size: 1.05rem; line-height: 2;">
+        <li>✅ <strong>Consistency:</strong> Daily practice builds strong problem-solving habits</li>
+        <li>✅ <strong>Interview Prep:</strong> Questions similar to real company interviews</li>
+        <li>✅ <strong>Performance Tracking:</strong> Monitor your improvement over time</li>
+        <li>✅ <strong>Multiple Solutions:</strong> Learn different approaches to same problem</li>
+        <li>✅ <strong>Community:</strong> Discuss solutions with other developers</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer style="background: #2c3e50; color: white; text-align: center; padding: 2rem; margin-top: 3rem;">
+    <p>&copy; 2024 StudyPro Hub. All rights reserved.</p>
+  </footer>
+
+  <script defer src="{% static 'js/dashboard-activity-tracker.js' %}"></script>
+</body>
+</html>

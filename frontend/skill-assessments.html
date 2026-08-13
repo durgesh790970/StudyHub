@@ -1,0 +1,244 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skill Assessments — StudyPro Hub</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    .assessment-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border: 2px solid #e0e0e0;
+      transition: all 0.3s ease;
+    }
+    .assessment-card:hover {
+      border-color: #0d6efd;
+      box-shadow: 0 6px 16px rgba(13, 110, 253, 0.2);
+    }
+    .assessment-card h4 {
+      margin-top: 0;
+      color: #0d6efd;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #e0e0e0;
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 0.5rem 0;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #0d6efd, #0056ca);
+      border-radius: 4px;
+    }
+    .skill-level {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    .level-beginner {
+      background: #d4edda;
+      color: #155724;
+    }
+    .level-intermediate {
+      background: #fff3cd;
+      color: #856404;
+    }
+    .level-advanced {
+      background: #cfe2ff;
+      color: #084298;
+    }
+    .level-expert {
+      background: #f8d7da;
+      color: #721c24;
+    }
+    .btn-primary {
+      background: #0d6efd;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: #0056ca;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .stat-box {
+      background: linear-gradient(135deg, #0d6efd 0%, #0056ca 100%);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .stat-value {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    .stat-label {
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="nav-wrap">
+        <a href="{% url 'accounts:index' %}" class="brand">
+          <span class="logo">SP</span>
+          <span>StudyPro Hub</span>
+        </a>
+        <nav class="main-nav">
+          
+          {% if user.is_authenticated %}
+            <a href="{% url 'accounts:profile' %}" class="profile-link">👤</a>
+          {% else %}
+            <a href="{% url 'accounts:login_page' %}" class="cta">Login</a>
+          {% endif %}
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section style="padding: 2rem 0;">
+      <h1>🎯 Skill Assessments</h1>
+      <p style="font-size: 1.1rem; color: #666;">Evaluate your strengths and weaknesses with comprehensive reports</p>
+    </section>
+
+    <section style="padding: 2rem 0;">
+      <h2>Your Skills Overview</h2>
+      
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-value">5</div>
+          <div class="stat-label">Skills Assessed</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value">78%</div>
+          <div class="stat-label">Overall Score</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value">4/5</div>
+          <div class="stat-label">Average Level</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value">12</div>
+          <div class="stat-label">Days Consistent</div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding: 2rem 0;">
+      <h2>Skill Assessments</h2>
+      
+      <div class="assessment-card">
+        <h4>Data Structures & Algorithms</h4>
+        <span class="skill-level level-advanced">Advanced</span>
+        <p>Your proficiency in DSA fundamentals and problem-solving</p>
+        <div style="margin: 1rem 0;">
+          <strong>Your Score: 85/100</strong>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 85%;"></div>
+          </div>
+        </div>
+        <p style="font-size: 0.9rem; color: #666;">Strong: Arrays, Linked Lists, Trees | Needs work: Graph algorithms, Dynamic Programming</p>
+        <button class="btn-primary">Take Assessment Again</button>
+      </div>
+
+      <div class="assessment-card">
+        <h4>System Design</h4>
+        <span class="skill-level level-intermediate">Intermediate</span>
+        <p>Your ability to design scalable systems and architecture</p>
+        <div style="margin: 1rem 0;">
+          <strong>Your Score: 72/100</strong>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 72%;"></div>
+          </div>
+        </div>
+        <p style="font-size: 0.9rem; color: #666;">Strong: Databases, Caching | Needs work: Distributed systems, Load balancing</p>
+        <button class="btn-primary">Take Assessment Again</button>
+      </div>
+
+      <div class="assessment-card">
+        <h4>Web Development</h4>
+        <span class="skill-level level-advanced">Advanced</span>
+        <p>Your knowledge of modern web technologies and frameworks</p>
+        <div style="margin: 1rem 0;">
+          <strong>Your Score: 88/100</strong>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 88%;"></div>
+          </div>
+        </div>
+        <p style="font-size: 0.9rem; color: #666;">Strong: Frontend, React, Node.js | Needs work: Advanced DevOps, Microservices</p>
+        <button class="btn-primary">Take Assessment Again</button>
+      </div>
+
+      <div class="assessment-card">
+        <h4>Quantitative Aptitude</h4>
+        <span class="skill-level level-intermediate">Intermediate</span>
+        <p>Your numerical and mathematical problem-solving ability</p>
+        <div style="margin: 1rem 0;">
+          <strong>Your Score: 68/100</strong>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 68%;"></div>
+          </div>
+        </div>
+        <p style="font-size: 0.9rem; color: #666;">Strong: Percentages, Profit-loss | Needs work: Permutation-combination, Statistics</p>
+        <button class="btn-primary">Take Assessment Again</button>
+      </div>
+
+      <div class="assessment-card">
+        <h4>Communication Skills</h4>
+        <span class="skill-level level-beginner">Beginner</span>
+        <p>Your presentation and communication abilities</p>
+        <div style="margin: 1rem 0;">
+          <strong>Your Score: 62/100</strong>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 62%;"></div>
+          </div>
+        </div>
+        <p style="font-size: 0.9rem; color: #666;">Strong: Written communication | Needs work: Public speaking, Presentation skills</p>
+        <button class="btn-primary">Take Assessment Again</button>
+      </div>
+    </section>
+
+    <section style="padding: 2rem 0; background: #f8f9fa; border-radius: 12px; padding: 2rem;">
+      <h2>Improvement Plan</h2>
+      <div style="background: white; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #0d6efd;">
+        <h4 style="margin-top: 0;">Focus Areas to Improve</h4>
+        <ol style="font-size: 1.05rem; line-height: 2;">
+          <li><strong>Graph Algorithms:</strong> Spend 2-3 weeks on graph traversal and shortest path algorithms</li>
+          <li><strong>Quantitative Skills:</strong> Daily practice on aptitude problems to improve accuracy</li>
+          <li><strong>Communication:</strong> Practice mock interviews and presentation skills</li>
+          <li><strong>System Design:</strong> Study distributed systems and microservices architecture</li>
+          <li><strong>Time Management:</strong> Practice solving problems under time constraints</li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer style="background: #2c3e50; color: white; text-align: center; padding: 2rem; margin-top: 3rem;">
+    <p>&copy; 2024 StudyPro Hub. All rights reserved.</p>
+  </footer>
+
+  <script defer src="{% static 'js/dashboard-activity-tracker.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Live Doubt Sessions — StudyPro Hub</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    .session-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-left: 4px solid #0d6efd;
+    }
+    .session-card h4 {
+      margin-top: 0;
+      color: #0d6efd;
+    }
+    .mentor-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .mentor-avatar {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #0d6efd 0%, #0056ca 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    .btn-primary {
+      background: #0d6efd;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: #0056ca;
+      transform: translateY(-2px);
+    }
+    .time-badge {
+      display: inline-block;
+      background: #e7f3ff;
+      color: #0d6efd;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      margin-right: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="nav-wrap">
+        <a href="{% url 'accounts:index' %}" class="brand">
+          <span class="logo">SP</span>
+          <span>StudyPro Hub</span>
+        </a>
+        <nav class="main-nav">
+          
+          {% if user.is_authenticated %}
+            <a href="{% url 'accounts:profile' %}" class="profile-link">👤</a>
+          {% else %}
+            <a href="{% url 'accounts:login_page' %}" class="cta">Login</a>
+          {% endif %}
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section style="padding: 2rem 0;">
+      <h1>🎓 Live Doubt Sessions</h1>
+      <p style="font-size: 1.1rem; color: #666;">Get your doubts cleared instantly with our expert mentors</p>
+    </section>
+
+    <section style="padding: 2rem 0;">
+      <h2>Upcoming Sessions</h2>
+      
+      <div class="session-card">
+        <h4>Data Structures - Arrays & Linked Lists</h4>
+        <span class="time-badge">📅 Today 6:00 PM</span>
+        <span class="time-badge">⏱️ 1 Hour</span>
+        <div class="mentor-info">
+          <div class="mentor-avatar">RK</div>
+          <div>
+            <strong>Rajesh Kumar</strong><br>
+            <small>10+ years experience, Senior Engineer at Amazon</small>
+          </div>
+        </div>
+        <p>Learn about arrays, linked lists, and how to solve common DSA problems. Perfect for beginners!</p>
+        <button class="btn-primary">Join Session</button>
+      </div>
+
+      <div class="session-card">
+        <h4>Aptitude - Percentages & Profit-Loss</h4>
+        <span class="time-badge">📅 Tomorrow 7:00 PM</span>
+        <span class="time-badge">⏱️ 45 minutes</span>
+        <div class="mentor-info">
+          <div class="mentor-avatar">PS</div>
+          <div>
+            <strong>Priya Singh</strong><br>
+            <small>CAT Scorer, Expert in Quantitative Aptitude</small>
+          </div>
+        </div>
+        <p>Master the concepts of percentages, profit-loss, and solve tricky questions step-by-step.</p>
+        <button class="btn-primary">Join Session</button>
+      </div>
+
+      <div class="session-card">
+        <h4>HR & Behavioral Interview Tips</h4>
+        <span class="time-badge">📅 Day after tomorrow 5:30 PM</span>
+        <span class="time-badge">⏱️ 1 Hour</span>
+        <div class="mentor-info">
+          <div class="mentor-avatar">AJ</div>
+          <div>
+            <strong>Anjali Joshi</strong><br>
+            <small>HR Manager at Microsoft, Interview Coach</small>
+          </div>
+        </div>
+        <p>Learn how to present yourself confidently in interviews and handle tricky HR questions.</p>
+        <button class="btn-primary">Join Session</button>
+      </div>
+
+      <div class="session-card">
+        <h4>SQL & Database Queries</h4>
+        <span class="time-badge">📅 Next Week 6:30 PM</span>
+        <span class="time-badge">⏱️ 1.5 Hours</span>
+        <div class="mentor-info">
+          <div class="mentor-avatar">VK</div>
+          <div>
+            <strong>Vikram Kumar</strong><br>
+            <small>Database Expert, Google Cloud Certified</small>
+          </div>
+        </div>
+        <p>Deep dive into SQL, complex queries, joins, and database optimization techniques.</p>
+        <button class="btn-primary">Join Session</button>
+      </div>
+    </section>
+
+    <section style="padding: 2rem 0; background: #f8f9fa; border-radius: 12px; padding: 2rem;">
+      <h2>How It Works</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem;">
+        <div style="text-align: center;">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">1️⃣</div>
+          <h4>Choose a Session</h4>
+          <p>Browse through upcoming sessions and choose one that matches your needs.</p>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">2️⃣</div>
+          <h4>Register (Optional)</h4>
+          <p>Optionally register for reminders and resources related to the session.</p>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">3️⃣</div>
+          <h4>Join & Ask</h4>
+          <p>Join the live session, ask your doubts, and get instant clarification from mentors.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="background: #2c3e50; color: white; text-align: center; padding: 2rem; margin-top: 3rem;">
+    <p>&copy; 2024 StudyPro Hub. All rights reserved.</p>
+  </footer>
+
+  <script defer src="{% static 'js/dashboard-activity-tracker.js' %}"></script>
+</body>
+</html>

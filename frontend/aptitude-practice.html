@@ -1,0 +1,227 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aptitude Practice Sets — StudyPro Hub</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    .practice-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-left: 4px solid #0d6efd;
+    }
+    .practice-card h4 {
+      margin-top: 0;
+      color: #0d6efd;
+    }
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #0d6efd;
+    }
+    .stat-label {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 0.5rem;
+    }
+    .btn-primary {
+      background: #0d6efd;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: #0056ca;
+      transform: translateY(-2px);
+    }
+    .company-tag {
+      display: inline-block;
+      background: #e7f3ff;
+      color: #0d6efd;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin-right: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="nav-wrap">
+        <a href="{% url 'accounts:index' %}" class="brand">
+          <span class="logo">SP</span>
+          <span>StudyPro Hub</span>
+        </a>
+        <nav class="main-nav">
+        
+          {% if user.is_authenticated %}
+            <a href="{% url 'accounts:profile' %}" class="profile-link">👤</a>
+          {% else %}
+            <a href="{% url 'accounts:login_page' %}" class="cta">Login</a>
+          {% endif %}
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section style="padding: 2rem 0;">
+      <h1>📊 Aptitude Practice Sets</h1>
+      <p style="font-size: 1.1rem; color: #666;">Company-specific aptitude questions with detailed solutions</p>
+    </section>
+
+    <section style="padding: 2rem 0;">
+      <h2>Practice Sets</h2>
+      
+      <div class="practice-card">
+        <h4>Google Quantitative Aptitude - Level 1</h4>
+        <span class="company-tag">Google</span>
+        <span class="company-tag">Beginner</span>
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="stat-value">25</div>
+            <div class="stat-label">Questions</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">45</div>
+            <div class="stat-label">Minutes</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">2,543</div>
+            <div class="stat-label">Attempts</div>
+          </div>
+        </div>
+        <p>Master basics of percentages, averages, ratios, and profit-loss problems used in Google's screening rounds.</p>
+        <button class="btn-primary">Start Practice</button>
+      </div>
+
+      <div class="practice-card">
+        <h4>Amazon Logical Reasoning - Level 2</h4>
+        <span class="company-tag">Amazon</span>
+        <span class="company-tag">Intermediate</span>
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="stat-value">30</div>
+            <div class="stat-label">Questions</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">60</div>
+            <div class="stat-label">Minutes</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">1,876</div>
+            <div class="stat-label">Attempts</div>
+          </div>
+        </div>
+        <p>Syllogisms, statement conclusions, and logical deduction problems from Amazon's hiring process.</p>
+        <button class="btn-primary">Start Practice</button>
+      </div>
+
+      <div class="practice-card">
+        <h4>Microsoft Data Interpretation - Level 3</h4>
+        <span class="company-tag">Microsoft</span>
+        <span class="company-tag">Advanced</span>
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="stat-value">20</div>
+            <div class="stat-label">Questions</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">40</div>
+            <div class="stat-label">Minutes</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">1,234</div>
+            <div class="stat-label">Attempts</div>
+          </div>
+        </div>
+        <p>Complex graphs, tables, and charts interpretation - real questions from Microsoft's aptitude tests.</p>
+        <button class="btn-primary">Start Practice</button>
+      </div>
+
+      <div class="practice-card">
+        <h4>Goldman Sachs Numerical Ability - Elite</h4>
+        <span class="company-tag">Goldman Sachs</span>
+        <span class="company-tag">Expert</span>
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="stat-value">35</div>
+            <div class="stat-label">Questions</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">90</div>
+            <div class="stat-label">Minutes</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">456</div>
+            <div class="stat-label">Attempts</div>
+          </div>
+        </div>
+        <p>High-difficulty numerical problems including statistics, probability, and complex calculations.</p>
+        <button class="btn-primary">Start Practice</button>
+      </div>
+
+      <div class="practice-card">
+        <h4>Accenture Verbal & Reasoning</h4>
+        <span class="company-tag">Accenture</span>
+        <span class="company-tag">Intermediate</span>
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="stat-value">50</div>
+            <div class="stat-label">Questions</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">75</div>
+            <div class="stat-label">Minutes</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">3,210</div>
+            <div class="stat-label">Attempts</div>
+          </div>
+        </div>
+        <p>Verbal ability combined with reasoning - perfect for consulting and IT service companies.</p>
+        <button class="btn-primary">Start Practice</button>
+      </div>
+    </section>
+
+    <section style="padding: 2rem 0; background: #f8f9fa; border-radius: 12px; padding: 2rem;">
+      <h2>Features</h2>
+      <ul style="font-size: 1.05rem; line-height: 2;">
+        <li>✅ <strong>Detailed Solutions:</strong> Every question includes step-by-step solutions</li>
+        <li>✅ <strong>Company-Specific:</strong> Questions exactly like real company tests</li>
+        <li>✅ <strong>Performance Analytics:</strong> Track your progress and weak areas</li>
+        <li>✅ <strong>Timed Practice:</strong> Simulate actual test conditions</li>
+        <li>✅ <strong>Discussion Forum:</strong> Clarify doubts with experts and peers</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer style="background: #2c3e50; color: white; text-align: center; padding: 2rem; margin-top: 3rem;">
+    <p>&copy; 2024 StudyPro Hub. All rights reserved.</p>
+  </footer>
+
+  <script defer src="{% static 'js/dashboard-activity-tracker.js' %}"></script>
+</body>
+</html>

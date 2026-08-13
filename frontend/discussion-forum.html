@@ -1,0 +1,370 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Discussion Forum — StudyPro Hub</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    .thread-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-left: 4px solid #0d6efd;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .thread-card:hover {
+      box-shadow: 0 6px 16px rgba(13, 110, 253, 0.2);
+    }
+    .thread-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 1rem;
+    }
+    .thread-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 0;
+      color: #333;
+    }
+    .thread-meta {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: #666;
+      margin-top: 0.5rem;
+    }
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #0d6efd 0%, #0056ca 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+    .user-details strong {
+      color: #333;
+    }
+    .tag {
+      display: inline-block;
+      background: #e7f3ff;
+      color: #0d6efd;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin-right: 0.3rem;
+    }
+    .thread-preview {
+      color: #666;
+      line-height: 1.5;
+      margin: 0.75rem 0;
+    }
+    .btn-primary {
+      background: #0d6efd;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: #0056ca;
+    }
+    .btn-new-thread {
+      margin-bottom: 2rem;
+    }
+    .filter-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid #e0e0e0;
+    }
+    .tab {
+      padding: 1rem;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: #666;
+    }
+    .tab.active {
+      border-bottom-color: #0d6efd;
+      color: #0d6efd;
+      font-weight: 600;
+    }
+    .stats-box {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .stat-item {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #0d6efd;
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      color: #666;
+      margin-top: 0.25rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="nav-wrap">
+        <a href="{% url 'accounts:index' %}" class="brand">
+          <span class="logo">SP</span>
+          <span>StudyPro Hub</span>
+        </a>
+        <nav class="main-nav">
+          
+          {% if user.is_authenticated %}
+            <a href="{% url 'accounts:profile' %}" class="profile-link">👤</a>
+          {% else %}
+            <a href="{% url 'accounts:login_page' %}" class="cta">Login</a>
+          {% endif %}
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section style="padding: 2rem 0;">
+      <h1>💬 Discussion Forum</h1>
+      <p style="font-size: 1.1rem; color: #666;">Connect with peers and mentors to share interview experiences and resolve doubts</p>
+    </section>
+
+    <section style="padding: 2rem 0;">
+      <button class="btn-primary btn-new-thread">➕ Start New Thread</button>
+      
+      <div class="filter-tabs">
+        <div class="tab active">All Threads</div>
+        <div class="tab">Recent</div>
+        <div class="tab">Most Replied</div>
+        <div class="tab">Unanswered</div>
+      </div>
+
+      <div class="stats-box">
+        <div class="stat-item">
+          <div class="stat-value">1,234</div>
+          <div class="stat-label">Total Threads</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">5,678</div>
+          <div class="stat-label">Total Replies</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">892</div>
+          <div class="stat-label">Active Members</div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding: 2rem 0;">
+      <h2>Popular Discussions</h2>
+      
+      <div class="thread-card">
+        <div class="thread-header">
+          <div>
+            <h4 class="thread-title">Tips for Google Full Stack Interview</h4>
+            <div class="thread-meta">
+              <span class="meta-item">👁️ 234 views</span>
+              <span class="meta-item">💬 45 replies</span>
+              <span class="meta-item">❤️ 82 likes</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="user-info">
+          <div class="user-avatar">RK</div>
+          <div>
+            <strong>Rajesh Kumar</strong> • Posted 3 days ago
+            <br><small style="color: #999;">Google Interview Experience</small>
+          </div>
+        </div>
+
+        <span class="tag">Google</span>
+        <span class="tag">Interview</span>
+        <span class="tag">Full-stack</span>
+
+        <div class="thread-preview">
+          "Just cleared my Google full stack interview! Here are some tips that really helped me: First, focus on system design rather than just coding. They ask about scalability, load balancing, and database optimization. Second, practice with real-world problems..."
+        </div>
+
+        <button class="btn-primary">View Discussion</button>
+      </div>
+
+      <div class="thread-card">
+        <div class="thread-header">
+          <div>
+            <h4 class="thread-title">Help with Amazon DSA Round</h4>
+            <div class="thread-meta">
+              <span class="meta-item">👁️ 156 views</span>
+              <span class="meta-item">💬 28 replies</span>
+              <span class="meta-item">❤️ 34 likes</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="user-info">
+          <div class="user-avatar">PS</div>
+          <div>
+            <strong>Priya Singh</strong> • Posted 2 days ago
+            <br><small style="color: #999;">Struggling with graph algorithms</small>
+          </div>
+        </div>
+
+        <span class="tag">Amazon</span>
+        <span class="tag">DSA</span>
+        <span class="tag">Graph</span>
+
+        <div class="thread-preview">
+          "I'm preparing for Amazon and struggling with graph algorithms. I can understand the basic DFS/BFS but failing on more complex problems like topological sort. Can someone help me understand the approach? Also, any resources you'd recommend?"
+        </div>
+
+        <button class="btn-primary">View Discussion</button>
+      </div>
+
+      <div class="thread-card">
+        <div class="thread-header">
+          <div>
+            <h4 class="thread-title">Mock Interview Experience Thread</h4>
+            <div class="thread-meta">
+              <span class="meta-item">👁️ 432 views</span>
+              <span class="meta-item">💬 89 replies</span>
+              <span class="meta-item">❤️ 156 likes</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="user-info">
+          <div class="user-avatar">AJ</div>
+          <div>
+            <strong>Anjali Joshi</strong> • Posted 5 days ago
+            <br><small style="color: #999;">Share your mock interview experiences</small>
+          </div>
+        </div>
+
+        <span class="tag">Mock-Interview</span>
+        <span class="tag">Internship</span>
+        <span class="tag">Interview</span>
+
+        <div class="thread-preview">
+          "Let's share our mock interview experiences! Please mention: 1) Company, 2) Round (online/F2F/Virtual), 3) Duration, 4) What went well, 5) What could be improved. This will help others prepare better. Starting with my recent Microsoft mock interview..."
+        </div>
+
+        <button class="btn-primary">View Discussion</button>
+      </div>
+
+      <div class="thread-card">
+        <div class="thread-header">
+          <div>
+            <h4 class="thread-title">Best Resources for Quantitative Aptitude</h4>
+            <div class="thread-meta">
+              <span class="meta-item">👁️ 267 views</span>
+              <span class="meta-item">💬 34 replies</span>
+              <span class="meta-item">❤️ 98 likes</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="user-info">
+          <div class="user-avatar">VK</div>
+          <div>
+            <strong>Vikram Kumar</strong> • Posted 1 week ago
+            <br><small style="color: #999;">Resource compilation for aptitude</small>
+          </div>
+        </div>
+
+        <span class="tag">Aptitude</span>
+        <span class="tag">Resources</span>
+        <span class="tag">Learning</span>
+
+        <div class="thread-preview">
+          "Here's a comprehensive list of best resources for quantitative aptitude: Books: RS Aggarwal - Quantitative Aptitude, Arun Sharma's book... Online: YouTube channels, forums, practice websites... Let me know if you have other recommendations!"
+        </div>
+
+        <button class="btn-primary">View Discussion</button>
+      </div>
+
+      <div class="thread-card">
+        <div class="thread-header">
+          <div>
+            <h4 class="thread-title">Tips for Handling Stress During Interviews</h4>
+            <div class="thread-meta">
+              <span class="meta-item">👁️ 189 views</span>
+              <span class="meta-item">💬 52 replies</span>
+              <span class="meta-item">❤️ 124 likes</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="user-info">
+          <div class="user-avatar">MC</div>
+          <div>
+            <strong>Mira Chauhan</strong> • Posted 4 days ago
+            <br><small style="color: #999;">Mental health & stress management</small>
+          </div>
+        </div>
+
+        <span class="tag">Mental-Health</span>
+        <span class="tag">Interview-Tips</span>
+        <span class="tag">Stress</span>
+
+        <div class="thread-preview">
+          "Feeling overwhelmed with interview prep? Here are techniques that helped me: 1) Practice meditation, 2) Regular exercise, 3) Proper sleep schedule, 4) Positive affirmations, 5) Mock interviews to build confidence. Remember, it's not just about knowing..."
+        </div>
+
+        <button class="btn-primary">View Discussion</button>
+      </div>
+    </section>
+
+    <section style="padding: 2rem 0; background: #f8f9fa; border-radius: 12px; padding: 2rem;">
+      <h2>Forum Guidelines</h2>
+      <ul style="font-size: 1.05rem; line-height: 2;">
+        <li>✅ <strong>Be Respectful:</strong> Treat all members with courtesy and respect</li>
+        <li>✅ <strong>Stay On Topic:</strong> Keep discussions relevant to job preparation and interviews</li>
+        <li>✅ <strong>No Spam:</strong> Avoid promotional content and irrelevant links</li>
+        <li>✅ <strong>Share Knowledge:</strong> Help fellow members with your experience and resources</li>
+        <li>✅ <strong>Search First:</strong> Check if your question has been answered before posting</li>
+        <li>✅ <strong>Be Specific:</strong> Provide context and details when asking questions</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer style="background: #2c3e50; color: white; text-align: center; padding: 2rem; margin-top: 3rem;">
+    <p>&copy; 2024 StudyPro Hub. All rights reserved.</p>
+  </footer>
+
+  <script defer src="{% static 'js/dashboard-activity-tracker.js' %}"></script>
+</body>
+</html>

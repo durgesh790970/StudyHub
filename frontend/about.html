@@ -1,0 +1,486 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About Us — StudyPro Hub</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0d6efd;
+      margin-top: 3rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 3px solid #0d6efd;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .info-card {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border-left: 4px solid #0d6efd;
+    }
+    .info-card h4 {
+      margin-top: 0;
+      color: #0d6efd;
+      font-size: 1.2rem;
+    }
+    .info-card p {
+      margin: 0.5rem 0;
+      line-height: 1.6;
+      color: #555;
+    }
+    .features-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .features-list li {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #e0e0e0;
+      color: #333;
+      font-size: 1rem;
+    }
+    .features-list li:last-child {
+      border-bottom: none;
+    }
+    .features-list li:before {
+      content: "✓ ";
+      color: #0d6efd;
+      font-weight: bold;
+      margin-right: 0.5rem;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .stat-box {
+      background: linear-gradient(135deg, #0d6efd 0%, #0056ca 100%);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .stat-value {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+    .benefit-item {
+      background: #f8f9fa;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      border-radius: 8px;
+      border-left: 4px solid #0d6efd;
+    }
+    .benefit-item h4 {
+      margin-top: 0;
+      color: #0d6efd;
+    }
+    .faq-item {
+      background: white;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    .faq-item h4 {
+      margin-top: 0;
+      color: #0d6efd;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .faq-item h4:hover {
+      color: #0056ca;
+    }
+    .faq-answer {
+      color: #555;
+      line-height: 1.6;
+      margin-top: 1rem;
+      display: none;
+    }
+    .faq-answer.show {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="nav-wrap">
+        <a href="{% url 'accounts:index' %}" class="brand">
+          <span class="logo">SP</span>
+          <span>StudyPro Hub</span>
+        </a>
+
+        <nav class="main-nav">
+          <a href="{% url 'accounts:index' %}">Home</a>
+          <a href="{% url 'accounts:pdfs_page' %}">PDF</a>
+          <a href="{% url 'accounts:videos_page' %}">Video</a>
+          <a href="{% url 'accounts:quiz_page' %}">Quiz</a>
+          <a href="{% url 'accounts:interview_page' %}">Interview</a>
+          <a href="{% url 'accounts:contect_page' %}">Contact</a>
+
+          {% if user.is_authenticated %}
+            <a href="{% url 'accounts:profile' %}" class="profile-link">👤</a>
+          {% else %}
+            <a href="{% url 'accounts:login_page' %}" class="cta">Login</a>
+          {% endif %}
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section style="padding: 2rem 0; text-align: center;">
+      <h1 style="font-size: 2.5rem; color: #0d6efd; margin-bottom: 1rem;">About StudyPro Hub</h1>
+      <p style="font-size: 1.1rem; color: #666; max-width: 700px; margin: 0 auto; line-height: 1.8;">
+        Your complete one-stop solution for placement preparation and interview success. 
+        We provide comprehensive resources, expert guidance, and real-world practice to help you land your dream job.
+      </p>
+    </section>
+
+    <!-- What is StudyPro Hub -->
+    <section style="padding: 2rem 0;">
+      <h2 class="section-title">📌 What is StudyPro Hub?</h2>
+      <p style="font-size: 1.05rem; line-height: 1.8; color: #555;">
+        StudyPro Hub is a comprehensive online learning platform designed specifically for college students and job seekers 
+        preparing for placements and technical interviews. We combine interactive learning, expert mentorship, real-world problems, 
+        and a supportive community to help you succeed.
+      </p>
+      <p style="font-size: 1.05rem; line-height: 1.8; color: #555;">
+        Whether you're just starting your preparation or fine-tuning your skills before your dream company's interview, 
+        StudyPro Hub has everything you need to succeed.
+      </p>
+    </section>
+
+    <!-- Key Statistics -->
+    <section style="padding: 2rem 0;">
+      <h2 class="section-title">📊 Our Impact</h2>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-value">50K+</div>
+          <div class="stat-label">Active Students</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value">100+</div>
+          <div class="stat-label">Companies</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value">5K+</div>
+          <div class="stat-label">Success Stories</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value">95%</div>
+          <div class="stat-label">Success Rate</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features & Resources -->
+    <section style="padding: 2rem 0;">
+      <h2 class="section-title">🎯 What We Offer</h2>
+      
+      <div class="info-grid">
+        <div class="info-card">
+          <h4>📚 Study Materials</h4>
+          <p>Company-specific PDFs, curated notes, and structured learning paths for all technical topics.</p>
+          <ul class="features-list">
+            <li>Aptitude & Reasoning</li>
+            <li>Data Structures</li>
+            <li>System Design</li>
+            <li>Database Concepts</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h4>🎬 Video Lessons</h4>
+          <p>High-quality video tutorials covering all topics from basics to advanced concepts.</p>
+          <ul class="features-list">
+            <li>Concept Explanations</li>
+            <li>Problem Walkthroughs</li>
+            <li>Interview Tips</li>
+            <li>Expert Sessions</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h4>💻 Coding Practice</h4>
+          <p>Daily coding challenges with multiple programming language support.</p>
+          <ul class="features-list">
+            <li>Array & Strings</li>
+            <li>Trees & Graphs</li>
+            <li>Dynamic Programming</li>
+            <li>System Design</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h4>🎤 Mock Interviews</h4>
+          <p>Practice interviews simulating real company interview scenarios.</p>
+          <ul class="features-list">
+            <li>Technical Rounds</li>
+            <li>HR Interviews</li>
+            <li>Company-Specific</li>
+            <li>Feedback & Analysis</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h4>📝 Aptitude Tests</h4>
+          <p>Comprehensive aptitude practice sets for placement exams.</p>
+          <ul class="features-list">
+            <li>Quantitative</li>
+            <li>Logical Reasoning</li>
+            <li>Verbal Ability</li>
+            <li>Data Interpretation</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h4>💬 Community Forum</h4>
+          <p>Connect with peers and mentors to discuss problems and share experiences.</p>
+          <ul class="features-list">
+            <li>Q&A Support</li>
+            <li>Peer Learning</li>
+            <li>Experience Sharing</li>
+            <li>Mentor Guidance</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h4>🎓 Live Sessions</h4>
+          <p>Real-time interaction with expert mentors to clear doubts instantly.</p>
+          <ul class="features-list">
+            <li>Doubt Clearing</li>
+            <li>Topic Deep Dives</li>
+            <li>Q&A Sessions</li>
+            <li>Weekly Classes</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h4>🚀 Job Alerts</h4>
+          <p>Get notified about latest job opportunities from top companies.</p>
+          <ul class="features-list">
+            <li>On-Campus Drives</li>
+            <li>Off-Campus Jobs</li>
+            <li>Internships</li>
+            <li>Real-time Alerts</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h4>📄 Resume Builder</h4>
+          <p>Professional resume templates and expert tips to make you stand out.</p>
+          <ul class="features-list">
+            <li>ATS-Optimized</li>
+            <li>Templates</li>
+            <li>Expert Tips</li>
+            <li>Quality Check</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section style="padding: 2rem 0;">
+      <h2 class="section-title">✨ Benefits for You</h2>
+      
+      <div class="benefit-item">
+        <h4>🎯 Comprehensive Preparation</h4>
+        <p>Everything you need in one place - no need to search multiple websites. From basics to advanced concepts, all topics are covered systematically.</p>
+      </div>
+
+      <div class="benefit-item">
+        <h4>💪 Build Real Skills</h4>
+        <p>Practice with real company questions and get feedback from experts. Build confidence through repeated practice and improvement.</p>
+      </div>
+
+      <div class="benefit-item">
+        <h4>🌟 Expert Mentorship</h4>
+        <p>Learn from industry professionals who have worked at top companies like Google, Amazon, Microsoft, and Goldman Sachs.</p>
+      </div>
+
+      <div class="benefit-item">
+        <h4>🤝 Community Support</h4>
+        <p>Connect with thousands of students on the same journey. Share experiences, discuss problems, and motivate each other.</p>
+      </div>
+
+      <div class="benefit-item">
+        <h4>📈 Track Progress</h4>
+        <p>Monitor your improvement with detailed analytics. Identify weak areas and focus on improvement with data-driven insights.</p>
+      </div>
+
+      <div class="benefit-item">
+        <h4>⏰ Learn at Your Pace</h4>
+        <p>No fixed schedules. Learn whenever and wherever you want. All resources are available 24/7 for unlimited access.</p>
+      </div>
+
+      <div class="benefit-item">
+        <h4>💰 Affordable Learning</h4>
+        <p>Quality education at fraction of the cost of coaching centers. Flexible payment plans for all students.</p>
+      </div>
+
+      <div class="benefit-item">
+        <h4>🏆 Proven Results</h4>
+        <p>95% success rate with students landing jobs at top companies. Join thousands of successful graduates.</p>
+      </div>
+    </section>
+
+    <!-- Features by Topic -->
+    <section style="padding: 2rem 0;">
+      <h2 class="section-title">📋 Categories We Cover</h2>
+      
+      <div class="info-grid">
+        <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+          <h4 style="margin-top: 0; color: #0d6efd;">Data Structures & Algorithms</h4>
+          <p style="color: #666;">Arrays, Linked Lists, Trees, Graphs, Sorting, Searching, Dynamic Programming, and more.</p>
+        </div>
+
+        <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+          <h4 style="margin-top: 0; color: #0d6efd;">System Design</h4>
+          <p style="color: #666;">Scalability, Load Balancing, Databases, Caching, Microservices, and distributed systems.</p>
+        </div>
+
+        <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+          <h4 style="margin-top: 0; color: #0d6efd;">Web Development</h4>
+          <p style="color: #666;">HTML, CSS, JavaScript, React, Node.js, Databases, APIs, and deployment.</p>
+        </div>
+
+        <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+          <h4 style="margin-top: 0; color: #0d6efd;">Aptitude & Reasoning</h4>
+          <p style="color: #666;">Percentages, Profit-Loss, Permutations, Logic, Series, Data Interpretation, and more.</p>
+        </div>
+
+        <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+          <h4 style="margin-top: 0; color: #0d6efd;">Interview Preparation</h4>
+          <p style="color: #666;">Technical rounds, HR questions, behavioral interview tips, and mock practice.</p>
+        </div>
+
+        <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+          <h4 style="margin-top: 0; color: #0d6efd;">Company-Specific</h4>
+          <p style="color: #666;">Google, Amazon, Microsoft, Goldman Sachs, and other top companies' question sets.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section style="padding: 2rem 0;">
+      <h2 class="section-title">❓ Frequently Asked Questions</h2>
+      
+      <div class="faq-item">
+        <h4>Who can use StudyPro Hub? <span>+</span></h4>
+        <div class="faq-answer">
+          Anyone! Whether you're a college student preparing for placements, a job seeker transitioning careers, 
+          or someone looking to improve their technical skills - StudyPro Hub is for you. We cater to all skill levels from beginners to advanced.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h4>Do I need to pay to use StudyPro Hub? <span>+</span></h4>
+        <div class="faq-answer">
+          We offer both free and premium content. Basic resources like videos and some quizzes are free. 
+          Premium features like mock interviews, advanced practice sets, and personalized mentorship are available with a subscription.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h4>How much time should I dedicate daily? <span>+</span></h4>
+        <div class="faq-answer">
+          We recommend 2-3 hours of daily practice for optimal results. However, you can start with 1 hour and gradually increase as you get comfortable. 
+          Consistency matters more than duration.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h4>Can I access resources offline? <span>+</span></h4>
+        <div class="faq-answer">
+          Yes! Most of our PDFs and notes can be downloaded for offline access. However, video lessons and live sessions require internet connection.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h4>How are the mock interviews conducted? <span>+</span></h4>
+        <div class="faq-answer">
+          Mock interviews are conducted live with experienced mentors via video call. They simulate real company interview scenarios and provide detailed feedback on your performance.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h4>Will this guarantee me a job? <span>+</span></h4>
+        <div class="faq-answer">
+          While we have a 95% success rate, success depends on your dedication and effort. Our platform provides all the resources and guidance needed, but you need to put in the work to achieve your goals.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h4>How do I get help if I'm stuck? <span>+</span></h4>
+        <div class="faq-answer">
+          You can ask questions in our community forum, attend live doubt-clearing sessions with mentors, or message a mentor directly for personalized help.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h4>Can I interact with other students? <span>+</span></h4>
+        <div class="faq-answer">
+          Yes! Our community forum allows you to connect with thousands of students. You can discuss problems, share experiences, form study groups, and motivate each other.
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section style="padding: 2rem 0; text-align: center;">
+      <div style="background: linear-gradient(135deg, #0d6efd 0%, #0056ca 100%); color: white; padding: 3rem; border-radius: 12px;">
+        <h2 style="margin-top: 0; font-size: 1.8rem;">Ready to Start Your Journey?</h2>
+        <p style="font-size: 1.1rem; margin: 1rem 0;">Join thousands of successful students and start preparing for your dream job today!</p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a href="{% url 'accounts:signup_page' %}" style="background: white; color: #0d6efd; padding: 0.75rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-block;">Sign Up Free</a>
+          <a href="{% url 'accounts:index' %}" style="background: transparent; color: white; padding: 0.75rem 2rem; border-radius: 8px; border: 2px solid white; text-decoration: none; font-weight: 600; display: inline-block;">Back to Home</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="background: #2c3e50; color: white; padding: 3rem 0; margin-top: 4rem; text-align: center; border-top: 1px solid #34495e;">
+    <div class="container">
+      <p style="margin: 0.5rem 0; color: #bdc3c7;">© 2024 StudyPro Hub. All rights reserved.</p>
+      <p style="margin: 0.5rem 0; font-size: 0.9rem; color: #95a5a6;">Made with ❤️ for your success</p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.faq-item h4').forEach(header => {
+      header.addEventListener('click', function() {
+        const answer = this.nextElementSibling;
+        const isShowing = answer.classList.contains('show');
+        
+        document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('show'));
+        document.querySelectorAll('.faq-item h4 span').forEach(s => s.textContent = '+');
+        
+        if (!isShowing) {
+          answer.classList.add('show');
+          this.querySelector('span').textContent = '−';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

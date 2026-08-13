@@ -1,0 +1,193 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Resume Builder — StudyPro Hub</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    .template-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border: 2px solid #e0e0e0;
+      transition: all 0.3s ease;
+    }
+    .template-card:hover {
+      border-color: #0d6efd;
+      box-shadow: 0 6px 16px rgba(13, 110, 253, 0.2);
+    }
+    .template-preview {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+    .template-card h4 {
+      margin-top: 0;
+      color: #333;
+    }
+    .btn-primary {
+      background: #0d6efd;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      margin-right: 0.5rem;
+    }
+    .btn-primary:hover {
+      background: #0056ca;
+    }
+    .btn-secondary {
+      background: transparent;
+      color: #0d6efd;
+      border: 2px solid #0d6efd;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+    .features-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .feature-item {
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .feature-item-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="nav-wrap">
+        <a href="{% url 'accounts:index' %}" class="brand">
+          <span class="logo">SP</span>
+          <span>StudyPro Hub</span>
+        </a>
+        <nav class="main-nav">
+          
+          {% if user.is_authenticated %}
+            <a href="{% url 'accounts:profile' %}" class="profile-link">👤</a>
+          {% else %}
+            <a href="{% url 'accounts:login_page' %}" class="cta">Login</a>
+          {% endif %}
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section style="padding: 2rem 0;">
+      <h1>📄 Resume Builder</h1>
+      <p style="font-size: 1.1rem; color: #666;">Professional templates and expert tips to create a standout resume</p>
+    </section>
+
+    <section style="padding: 2rem 0;">
+      <h2>Resume Templates</h2>
+      
+      <div class="template-card">
+        <div class="template-preview">📋</div>
+        <h4>Modern Professional</h4>
+        <p>Clean, modern design perfect for tech companies. Emphasizes skills and projects.</p>
+        <button class="btn-primary">Use Template</button>
+        <button class="btn-secondary">Preview</button>
+      </div>
+
+      <div class="template-card">
+        <div class="template-preview">✨</div>
+        <h4>Creative Design</h4>
+        <p>Eye-catching design with visual elements. Great for designer and creative roles.</p>
+        <button class="btn-primary">Use Template</button>
+        <button class="btn-secondary">Preview</button>
+      </div>
+
+      <div class="template-card">
+        <div class="template-preview">🎯</div>
+        <h4>ATS-Optimized</h4>
+        <p>Specifically designed to pass Applicant Tracking Systems. Best for corporate jobs.</p>
+        <button class="btn-primary">Use Template</button>
+        <button class="btn-secondary">Preview</button>
+      </div>
+
+      <div class="template-card">
+        <div class="template-preview">🚀</div>
+        <h4>Startup-Focused</h4>
+        <p>Emphasizes innovation and entrepreneurial experience. Perfect for startups.</p>
+        <button class="btn-primary">Use Template</button>
+        <button class="btn-secondary">Preview</button>
+      </div>
+    </section>
+
+    <section style="padding: 2rem 0; background: #f8f9fa; border-radius: 12px; padding: 2rem;">
+      <h2>Resume Features</h2>
+      <div class="features-list">
+        <div class="feature-item">
+          <div class="feature-item-icon">✏️</div>
+          <strong>Drag & Drop Editor</strong>
+          <p>Easy-to-use interface to build your resume</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-item-icon">🎨</div>
+          <strong>Custom Colors</strong>
+          <p>Personalize colors and fonts</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-item-icon">📥</div>
+          <strong>Download PDF</strong>
+          <p>Export as PDF or Word document</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-item-icon">✓</div>
+          <strong>Quality Check</strong>
+          <p>AI-powered resume quality analysis</p>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding: 2rem 0;">
+      <h2>Expert Tips</h2>
+      <div style="background: white; border-left: 4px solid #0d6efd; padding: 1.5rem; border-radius: 8px;">
+        <h4 style="margin-top: 0;">10 Tips for a Standout Resume</h4>
+        <ol style="font-size: 1.05rem; line-height: 2;">
+          <li><strong>Use action verbs:</strong> Started with "Developed", "Implemented", "Led" instead of "Responsible for"</li>
+          <li><strong>Quantify achievements:</strong> Use numbers and percentages to showcase impact</li>
+          <li><strong>Keep it concise:</strong> 1-2 pages for freshers, max 3 for experienced professionals</li>
+          <li><strong>Tailor for the job:</strong> Customize your resume for each position</li>
+          <li><strong>Use keywords:</strong> Include skills mentioned in the job description</li>
+          <li><strong>Focus on results:</strong> Highlight what you achieved, not just duties</li>
+          <li><strong>Proofread carefully:</strong> Even one typo can cost you the job</li>
+          <li><strong>Use bullet points:</strong> Easier to scan and more professional</li>
+          <li><strong>Add LinkedIn:</strong> Include your professional LinkedIn profile URL</li>
+          <li><strong>Keep format consistent:</strong> Same fonts, spacing, and styling throughout</li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer style="background: #2c3e50; color: white; text-align: center; padding: 2rem; margin-top: 3rem;">
+    <p>&copy; 2024 StudyPro Hub. All rights reserved.</p>
+  </footer>
+
+  <script defer src="{% static 'js/dashboard-activity-tracker.js' %}"></script>
+</body>
+</html>
