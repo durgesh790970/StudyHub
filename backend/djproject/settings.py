@@ -12,8 +12,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Add parent directory to path so we can import database module
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+# Add the project directories to the import path. The Django `accounts` app
+# lives under `backend/api` but is intentionally imported as a top-level app.
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(PROJECT_ROOT / 'api'))
+sys.path.insert(0, str(PROJECT_ROOT.parent))
 
 # Database configuration
 from database.config import get_database_config
@@ -44,6 +47,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'djproject.urls'
